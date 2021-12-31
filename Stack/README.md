@@ -13,7 +13,7 @@ an error occurs if the stack is empty.
 
 Additionally, we define the following accessor methods for convenience:<br>
 
-<b>S.top(): </b> Return a reference to the top element of stack S, without
+<b>S.top(): </b> Returns a reference to the top element of stack S, without
 removing it; an error occurs if the stack is empty.<br>
 <b>S.is empty( ): </b> Return True if stack S does not contain any elements. <br>
 <b>len(S): </b> Return the number of elements in stack S; in Python, we
