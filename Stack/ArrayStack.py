@@ -4,6 +4,7 @@ from Empty import Empty
 class ArrayStack:
     """Implementation of a stack in python code using a list
     Methods - Push(e), pop, is_empty, length, top
+    Has exception if stack is empty
     """
 
     def __init__(self):
