@@ -1,5 +1,4 @@
 from Node import _Node as Node
-from Empty import Empty
 
 
 class _DoublyLinkedBase:
@@ -31,8 +30,6 @@ class _DoublyLinkedBase:
 
     def _delete_node(self, node):
         """Delete non-sentinel node from the list and return its element"""
-        if self.is_empty():
-            raise Empty('List is Empty')
 
         previous_one = node.prev_node
         next_one = node.next_node
@@ -40,7 +37,7 @@ class _DoublyLinkedBase:
 
         previous_one.next_node = next_one
         next_one.prev_node = previous_one
-        node.prev = node.next = node.element = None  # deprecate node
+        node.prev_node = node.next_node = node.element = None  # deprecate node
         self._size -= 1
         return element_of_node
 

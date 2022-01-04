@@ -20,3 +20,7 @@ node that is currently after the header.
 
 The deletion of a node: The two neighbors of the node to be deleted are linked directly
 to each other, thereby bypassing the original node.
+
+### Double ended Queue using Doubly Linked Lists
+The file LinkedDeque uses the _DoublyLinkedBase as a base class 
+to implement a Deque
