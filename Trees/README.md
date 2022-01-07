@@ -62,6 +62,12 @@ are contained in tree T.<br>
 **T.positions():** Generate an iteration of all positions of tree T.<br>
 **iter(T):** Generate an iteration of all elements stored within tree T.<br>
 
+#### Depth and Height
+The depth of p is the number of
+ancestors of p, excluding p itself. <br>
+The height of a nonempty tree T is equal to the maximum of
+the depths of its leaf positions.
+
 ### Implementation in Python
 The file Tree.py is an abstract base class that implements the above
 methods.
@@ -103,3 +109,25 @@ size, that represents the overall number of nodes of T.
 
 We define a concrete LinkedBinaryTree class that implements the
 binary tree ADT by subclassing the BinaryTree class
+
+
+For linked binary trees, a reasonable set of update methods to support for general
+usage are the following: <br>
+**T.add root(e):** Create a root for an empty tree, storing e as the element,
+and return the position of that root; an error occurs if the
+tree is not empty. <br>
+**T.add left(p, e):** Create a new node storing element e, link the node as the
+left child of position p, and return the resulting position;
+an error occurs if p already has a left child. <bR>
+**T.add right(p, e):** Create a new node storing element e, link the node as the
+right child of position p, and return the resulting position;
+an error occurs if p already has a right child.<bR>
+**T.replace(p, e):** Replace the element stored at position p with element e,
+and return the previously stored element.<bR>
+**T.delete(p):** Remove the node at position p, replacing it with its child,
+if any, and return the element that had been stored at p;
+an error occurs if p has two children.<bR>
+**T.attach(p, T1, T2):** Attach the internal structure of trees T1 and T2, respectively,
+as the left and right subtrees of leaf position p of
+T, and reset T1 and T2 to empty trees; an error condition
+occurs if p is not a leaf.
