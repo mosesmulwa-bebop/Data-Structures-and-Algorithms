@@ -66,3 +66,18 @@ to “wrap” nodes as Position instances to return to the user, making sure nev
 return a position referencing a sentinel. For convenience, we have overridden the
 inherited insert between utility method so that ours returns a position associated
 with the newly created node (whereas the inherited version returns the node itself ).
+
+
+### Sorting a positional list
+Sorting is done using the Insertion sort algorithm(see sorting algorithms)
+in which each element is placed relative to a growing collection 
+of previously sorted elements.
+
+We maintain a variable named marker that represents the rightmost position of
+the currently sorted portion of a list. During each pass, we consider the position just
+past the marker as the pivot and consider where the pivot’s element belongs relative
+to the sorted portion; we use another variable, named walk, to move leftward from
+the marker, as long as there remains a preceding element with value larger than the
+pivot’s.<br>
+
+![Positonal List Sort using insertion sort](PostionalListSort.PNG)
