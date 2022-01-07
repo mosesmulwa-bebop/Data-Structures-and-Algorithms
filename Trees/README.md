@@ -131,3 +131,24 @@ an error occurs if p has two children.<bR>
 as the left and right subtrees of leaf position p of
 T, and reset T1 and T2 to empty trees; an error condition
 occurs if p is not a leaf.
+
+
+## 2. Array-Based Binary Tree
+An alternative representation of a binary tree T is based
+on a way of numbering the
+positions of T. For every position p of T, let f (p) 
+be the integer defined as follows. <br>
+• If p is the root of T, then f (p) = 0. <br>
+• If p is the left child of position q, then f (p) = 2 f (q)+1. <bR>
+• If p is the right child of position q, then f (p) = 2 f (q)+2.
+
+![Array Binary Tree](ArrayBinarytree.PNG)
+
+## 3. Linked General Trees
+
+Implemented similarly to linked binary trees except instead of 
+each node having a left and right child, it basically has a 
+container containing the references of all its children.
+Container could be implemented using a list.
+
+![Linked General Tree](Generaltree.PNG)
