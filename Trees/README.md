@@ -152,3 +152,9 @@ container containing the references of all its children.
 Container could be implemented using a list.
 
 ![Linked General Tree](Generaltree.PNG)
+
+
+## Applications of trees
+The file expressiontree.py uses a linked binary tree
+to implement an expression tree for evaluating 
+arithmetic expressions
