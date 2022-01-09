@@ -151,7 +151,7 @@ each node having a left and right child, it basically has a
 container containing the references of all its children.
 Container could be implemented using a list.
 
-![Linked General Tree](Generaltree.PNG)
+![Linked General Tree](GeneralTree.PNG)
 
 
 ## Applications of trees
