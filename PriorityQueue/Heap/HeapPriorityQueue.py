@@ -1,4 +1,5 @@
 from PriorityQueue import PriorityQueueBase
+from Queue import Empty
 
 
 class HeapPriorityQueue(PriorityQueueBase):                            # base class defines _item
@@ -21,9 +22,6 @@ class HeapPriorityQueue(PriorityQueueBase):                            # base cl
         """Return index of Right child of j"""
         return 2*j + 2
 
-    def __len__(self):
-        """Return number of items in queue"""
-        return len(self._data)
 
     def _has_left(self, j):
         """Return True if j has a left child"""
@@ -47,6 +45,44 @@ class HeapPriorityQueue(PriorityQueueBase):                            # base cl
 
     def _downheap(self, j):
         """Perform down heap from index j"""
+        if self._has_left(j):
+            left = self._left(j)
+            smallest_child = left
+            if self._has_right(j):
+                right = self._right(j)
+                if self._data[right] < self._data[left]:
+                    smallest_child = right
+            if self._data[smallest_child] < self._data[j]:
+                self._swap(j, smallest_child)
+                self._downheap(smallest_child)
 
+    # -----------------------------------Public Behaviours----------------------------------------
 
+    def __len__(self):
+        """Return number of items in queue"""
+        return len(self._data)
+
+    def add(self, key, value):
+        """Add key value pair to tree"""
+        new_item = self._Item(key, value)           # create new item
+        self._data.append(new_item)                 # add item to back of list
+        last_index = len(self) - 1
+        self._upheap(last_index)                    # perform upheap bubbling from last index
+
+    def min(self):
+        """Return key value tuple of the minimum"""
+        if self.is_empty:
+            raise Empty('Priority Queue is Empty')
+        item = self._data[0]                        # minimum is at the root
+        return (item._key, item._value)
+
+    def remove_min(self):
+        """Return and remove minimum"""
+        if self.is_empty:
+            raise Empty('Priority Queue is Empty')
+        last_index = len(self) - 1
+        self._swap(0, last_index)                   # swap items at root and last index
+        item = self._data.pop()                     # remove and return item at last index
+        self._downheap(0)                           # perform down heap bubbling from index 0
+        return (item._key, item._value)
 
