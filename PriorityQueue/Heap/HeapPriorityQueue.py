@@ -5,8 +5,16 @@ from Queue import Empty
 class HeapPriorityQueue(PriorityQueueBase):                            # base class defines _item
     """Heap implementation of a priority queue using a list as underlying storage"""
 
-    def __init__(self):
-        self._data = []                                                 # initialize empty list
+    def __init__(self, contents=()):
+        """By default, it initializes an empty list.However, if contents is given, initialize list with contents
+
+         Contents should be an iterable sequence of key value pairs.
+         List will be made up of items of key value pairs in contents
+         """
+        self._data = [self._Item(k, v) for k, v in contents]                    # list maybe empty
+        # assuming contents was provided
+        if len(self._data) > 1:
+            self._heapify() # call heapify inorder to maintain relational property of heap
 
     # -------------------------------Non public utility methods------------------
 
@@ -55,6 +63,16 @@ class HeapPriorityQueue(PriorityQueueBase):                            # base cl
             if self._data[smallest_child] < self._data[j]:
                 self._swap(j, smallest_child)
                 self._downheap(smallest_child)
+
+    def _heapify(self):
+        """Method to ensure relational property of heap is satisfied"""
+        parent_of_last_index = self._parent(len(self) - 1)          # where we want loop to start
+        start = parent_of_last_index
+        stop = -1                                                   # stop at root which is 0,thus stop is -1
+        step_size = -1                                              # we are going backwards from last to root
+        for index in range(start, stop, step_size):
+            """Call downheap at every position from parent of last index to root"""
+            self._downheap(index)
 
     # -----------------------------------Public Behaviours----------------------------------------
 

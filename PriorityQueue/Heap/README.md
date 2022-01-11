@@ -50,3 +50,24 @@ defined as follows: <br>
 • If p is the root of T, then f (p) = 0. <bR>
 • If p is the left child of position q, then f (p) = 2 f (q)+1. <br>
 • If p is the right child of position q, then f (p) = 2 f (q)+2.
+
+## Bottom Up Heap Construction
+For simplicity of exposition, we describe this bottom-up heap construction assuming
+the number of keys, n, is an integer such that n = 2^(h+1) − 1. That is,
+the heap is a complete binary tree with every level being full, so the heap has
+height h = log(n+1)−1. Viewed non recursively, bottom-up heap construction
+consists of the following h+1 = log(n+1) steps:
+
+In the generic ith step, 2≤i≤h, we form(n+1)/2^i heaps, each storing 2i−1
+entries, by joining pairs of heaps storing (2^(i−1)−1) entries (constructed in the
+previous step) and adding a new entry. The new entry is placed initially at
+the root, but may have to move down with a down-heap bubbling to preserve
+the heap-order property.
+
+### Python implementation of a bottom up heap construction
+With our array-based representation of a heap, if we initially store all n items in
+arbitrary order within the array, we can implement the bottom-up heap construction
+process with a single loop that makes a call to downheap from each position of
+the tree, as long as those calls are ordered starting with the deepest level and ending
+with the root of the tree. In fact, that loop can start with the deepest nonleaf, since
+there is no effect when down-heap is called at a leaf position
