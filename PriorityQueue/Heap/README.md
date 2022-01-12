@@ -16,7 +16,7 @@ level h reside in the leftmost possible positions at that level.
 
 ## Implementing priority queue using heap
 
-###Adding an Item to the Heap
+### Adding an Item to the Heap
 Let us consider how to perform add(k,v) on a priority queue implemented with a
 heap T. We store the pair (k,v) as an item at a new node of the tree. To maintain
 the complete binary tree property, that new node should be placed at a position p
