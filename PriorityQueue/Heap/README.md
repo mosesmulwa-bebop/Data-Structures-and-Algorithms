@@ -12,7 +12,7 @@ if levels 0,1,2, . . . ,h−1 of T have the maximum number of nodes possible
 (namely, level i has 2^i nodes, for 0 ≤ i ≤ h−1) and the remaining nodes at
 level h reside in the leftmost possible positions at that level.
 
-![Heap](Heap.PNG)
+![Heap](Heap2.PNG)
 
 ## Implementing priority queue using heap
 
