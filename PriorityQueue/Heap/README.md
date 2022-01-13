@@ -71,3 +71,44 @@ process with a single loop that makes a call to downheap from each position of
 the tree, as long as those calls are ordered starting with the deepest level and ending
 with the root of the tree. In fact, that loop can start with the deepest nonleaf, since
 there is no effect when down-heap is called at a leaf position
+
+## Adaptable Priority Queue
+We may desire to have additional methods to our priority queue such as 
+update and remove. <br>
+In order to implement methods update and remove efficiently, we need a mechanism
+for finding a user’s element within a priority queue that avoids performing a
+linear search through the entire collection. <br>
+To support our goal, when a new element
+is added to the priority queue, we return a special object known as a locator to
+the caller. <br>We then require the user to provide an appropriate locator as a parameter
+when invoking the update or remove method, as follows, <BR>
+for a priority queue P: <br>
+**P.update(loc, k, v):** Replace key and value for the item identified by locator loc.
+**P.remove(loc):** Remove the item identified by locator loc from the priority
+queue and return its (key,value) pair.
+
+The locator abstraction is somewhat akin to the Position abstraction used in our
+positional list ADT.
+
+We may represent a heap using a sequence of locators.
+![Locator Sequence](LocatorInstances.PNG)
+
+Each Locator has: key, value, current index
+
+### Python Implementation
+We define a public Locator
+class that inherits from the nonpublic Item class and augments it with an additional
+index field.
+
+To update locators during the flow of our heap operations, we rely on an intentional
+design decision that our original class uses a nonpublic swap method for all
+data movement. We override that utility to execute the additional step of updating
+the stored indices within the two swapped locator instances.
+
+We provide a new bubble utility that manages the reinstatement of the heaporder
+property when a key has changed at an arbitrary position within the heap,
+either due to a key update, or the blind replacement of a removed element with the
+item from the last position of the tree. The bubble utility determines whether to
+apply up-heap or down-heap bubbling, depending on whether the given location
+has a parent with a smaller key.
+
