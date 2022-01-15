@@ -1,7 +1,7 @@
 
 ## Explanation
 It represents an abstraction in which unique keys are mapped
-to associated values.
+to associated values. Values do not have to be unique.
 
 ![Map](map.PNG)
 
