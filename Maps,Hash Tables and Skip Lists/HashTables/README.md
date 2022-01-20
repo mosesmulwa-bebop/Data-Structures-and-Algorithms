@@ -57,3 +57,16 @@ Once we have determined an integer hash code for
 a key object k, there is still the issue of mapping that integer into the range [0,N−1].
 This computation, known as a compression function, is the second action performed
 as part of an overall hash function
+
+### Multiply-Add-and-Divide (or “MAD”) method.
+This method maps an integer i to <br>
+**[(ai+b) mod p] mod N**, <br>
+where N is the size of the bucket array,<br>
+p is a prime number larger than N, <br>
+and a
+and b are integers chosen at random from the interval [0, p−1],
+with a > 0.<br>
+This
+compression function is chosen in order to eliminate repeated patterns in the set of
+hash codes and get us closer to having a “good” hash function, that is, one such that
+the probability any two different keys collide is 1/N.
