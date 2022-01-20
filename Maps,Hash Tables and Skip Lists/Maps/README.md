@@ -1,7 +1,7 @@
 
 ## Explanation
 It represents an abstraction in which unique keys are mapped
-to associated values.
+to associated values. Values do not have to be unique.
 
 ![Map](map.PNG)
 
@@ -27,7 +27,6 @@ for k in M.
 
 For additional convenience,
 map M should also support the following behaviors: <br>
-**N.B : These are Mutating behaviours** <br>
 **k in M:** Return True if the map contains an item with key k. In
 Python, this is implemented with the special contains
 method. <br>
@@ -54,22 +53,3 @@ entries of M.<br>
 associations.<br>
 **M != M2:** Return True if maps M and M2 do not have identical keyvalue
 associations.<br>
-
-## Implementation in Python
-
-The collections module provides two abstract base classes that are relevant to
-our current discussion: the Mapping and MutableMapping classes.<br> The Mapping
-class includes all nonmutating methods supported by Python’s dict class, while the
-MutableMapping class extends that to include the mutating methods.
-
-The significance of these abstract base classes is that they provide a framework
-to assist in creating a user-defined map class. <br>
-In particular, the **MutableMapping**
-class provides concrete implementations for all behaviors other than the first five
-: getitem , setitem , delitem , len , and iter .
-
-Our MapBase class is defined in **MapBase.py** extending
-the existing MutableMapping abstract base class so that we inherit the many
-useful concrete methods that class provides. <br> We then define a nonpublic nested
-Item class, whose instances are able to store both a key 
-and value.
