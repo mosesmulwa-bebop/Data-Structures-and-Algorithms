@@ -53,3 +53,41 @@ entries of M.<br>
 associations.<br>
 **M != M2:** Return True if maps M and M2 do not have identical keyvalue
 associations.<br>
+
+## Implementation in python
+
+The collections module provides two abstract base classes that are relevant to
+our current discussion: the Mapping and MutableMapping classes.<bR> The Mapping
+class includes all nonmutating methods supported by Python’s dict class, while the
+MutableMapping class extends that to include the mutating methods.
+
+In particular, the MutableMapping
+class provides concrete implementations for all behaviors other than the first five
+: getitem , setitem , delitem , len , and
+iter . <br>
+As we implement the map abstraction with various data structures, as
+long as we provide the five core behaviors, we can inherit all other derived behaviors
+by simply declaring MutableMapping as a parent class.
+
+Our MapBase class is defined in **MapBase.py**, extending
+the existing MutableMapping abstract base class so that we inherit the many
+useful concrete methods that class provides. <br>
+We then define a nonpublic nested
+Item class, whose instances are able to store both a key and value.
+
+## Simple Unsorted Map Implementation
+
+**UnsortedTableMap.py** presents an UnsortedTableMap
+class that relies on storing key-value pairs in 
+arbitrary order within a Python list. <br>
+An empty table is initialized as self. table within 
+the constructor for our map. <br>
+When a new key is entered into the map, ,
+we create a new instance of the nested Item class, which is inherited from our
+MapBase class. <br>
+This list-based map implementation is simple, but it is not particularly efficient. <br>
+Each of the fundamental methods, getitem , setitem , and delitem ,
+relies on a for loop to scan the underlying list of items in search of a matching key. <br>
+In a best-case scenario, such a match may be found near the beginning of the list, in
+which case the loop terminates; in the worst case, the entire list will be examined.
+Therefore, each of these methods runs in O(n) time on a map with n items.
