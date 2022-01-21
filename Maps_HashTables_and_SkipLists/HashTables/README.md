@@ -70,3 +70,73 @@ This
 compression function is chosen in order to eliminate repeated patterns in the set of
 hash codes and get us closer to having a “good” hash function, that is, one such that
 the probability any two different keys collide is 1/N.
+
+N.B:://
+**“good” hash function, that is, one such that
+the probability any two different keys collide is 1/N**
+
+## Collision Handling Schemes
+### 1. Separate Chaining
+A simple and efficient way for dealing with collisions is to have each bucket A[ j]
+store its own secondary container, holding items (k,v) such that h(k) = j. A natural
+choice for the secondary container is a small map
+instance implemented using a list.
+
+![Separate Chaining](SeparateChaining.PNG)
+
+Assuming we use a good hash function to index the n items
+of our map in a bucket array of capacity N, the expected size of a bucket is n/N.
+Therefore, if given a good hash function, the core map operations run in O(
+[n/N]).
+The ratio λ = n/N, called the **load factor** of the hash table, should be bounded by
+a small constant, preferably below 1.
+
+### 2. Open Adressing
+If space is at a premium (for example, if we are writing a program for a
+small handheld device), then we can use the alternative approach of always storing
+each item directly in a table slot.
+### Linear Probing
+A simple method for collision handling with open addressing
+is linear probing. <br>
+With this approach, if we try to insert an item (k,v) 
+into a bucket A[ j] that is already
+occupied, where j = h(k), then we next try A[( j+1) mod N]. <bR> 
+If A[( j+1) mod N]
+is also occupied, then we try A[( j+2) mod N], and so on,
+until we find an empty
+bucket that can accept the new item. <bR> Once this bucket is located, we simply insert
+the item there.
+
+![Linear Probing](LinearProbing.PNG)
+
+
+## Python Hash Table Implementation
+For that reason, we extend the MapBase
+class , to define a new HashMapBase class , providing much of the common functionality to our two hash table
+implementations. 
+
+The main design elements of the HashMapBase class are: <br>
+• The bucket array is represented as a Python list, named self. table, with all
+entries initialized to None. <br>
+• We maintain an instance variable self. n that represents the number of distinct
+items that are currently stored in the hash table. <br>
+• If the load factor of the table increases beyond 0.5, we double the size of the
+table and rehash all items into the new table.<br>
+• We define a hash function utility method that relies on Python’s built-in
+hash function to produce hash codes for keys, and a randomized Multiply-
+Add-and-Divide (MAD) formula for the compression function. <br>
+
+**Separate Chaining** <br>
+ChainHashMap.py provides a concrete implementation of a hash table with separate
+chaining, in the form of the ChainHashMap class. To represent a single bucket,
+it relies on an instance of the UnsortedTableMap class.
+
+**Linear Probing** <br>
+Our implementation of a ProbeHashMap class, using open addressing with linear
+probing, is given in ProbeHashMap.py. <br>
+In order to support deletions, we place a special marker
+in a table location at which an item has been deleted, so that we can distinguish
+between it and a location that has always been empty. <br>
+In our implementation, we
+declare a class-level attribute, AVAIL, as a sentinel.
+
